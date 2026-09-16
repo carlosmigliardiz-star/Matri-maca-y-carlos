@@ -49,21 +49,22 @@
   .ic--solid{fill:currentColor;stroke:none;}
 
   .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
+    display:inline-flex;align-items:center;gap:9px;
     font-family:'Baloo 2',sans-serif;font-weight:700;
-    font-size:.78rem;letter-spacing:2px;text-transform:uppercase;
+    font-size:1rem;letter-spacing:2.5px;text-transform:uppercase;
     color:var(--terracotta);margin-bottom:.7em;
   }
   .lead{color:var(--ink-soft);max-width:600px;margin:0 auto 1em;font-size:1.02rem;}
 
   /* buttons */
   .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:'Baloo 2',sans-serif;font-weight:600;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Baloo 2',sans-serif;font-weight:600;text-align:center;
     padding:13px 26px;border-radius:999px;border:2px solid transparent;
     cursor:pointer;text-decoration:none;font-size:.95rem;
     transition:transform .15s ease, box-shadow .15s ease;
   }
+  .ic--rot90{transform:rotate(90deg);transform-origin:50% 50%;}
   .btn:active{transform:translateY(1px) scale(.98);}
   .btn--solid{background:var(--terracotta);color:var(--paper);box-shadow:0 6px 0 var(--wood-dark);}
   .btn--solid:hover{filter:brightness(1.05);}
@@ -109,20 +110,49 @@
   .hero__leaf--tl{top:20px;left:6%;transform:rotate(-15deg);}
   .hero__leaf--br{bottom:-10px;right:6%;transform:rotate(200deg);}
   .sign{
-    max-width:600px;margin:0 auto;position:relative;padding:52px 34px 40px;
-    background:repeating-linear-gradient(180deg,#c99a63 0 34px,#bd8b56 34px 36px);
-    border-radius:10px;box-shadow:var(--shadow), inset 0 0 0 6px rgba(255,255,255,.06);
-    clip-path:polygon(1% 3%,99% 0%,100% 97%,2% 100%);
+    max-width:600px;margin:0 auto;position:relative;padding:52px 40px 44px;
+    background:var(--paper);
+    border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--sand-2);
+    overflow:hidden;
   }
+  .sign__deco{position:absolute;pointer-events:none;}
+  .sign__deco--star1{top:28px;left:36px;width:15px;height:15px;color:var(--mustard);}
+  .sign__deco--star2{top:44px;right:44px;width:12px;height:12px;color:var(--terracotta);transform:rotate(12deg);}
+  .sign__deco--leaf1{bottom:26px;left:24px;width:36px;height:36px;color:var(--sage);transform:rotate(-30deg) scaleX(-1);opacity:.9;}
+  .sign__deco--leaf2{bottom:26px;right:24px;width:36px;height:36px;color:var(--olive);transform:rotate(20deg);opacity:.9;}
   .sign__sun{color:var(--mustard);width:44px;height:44px;margin-bottom:10px;}
-  .sign h1{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(3.2rem,9vw,5rem);color:var(--paper);line-height:1;margin:0 0 6px;}
-  .sign h1 span{color:var(--rose);}
-  .sign__tag{color:var(--cream);font-size:1.05rem;max-width:380px;margin:0 auto 18px;opacity:.92;}
-  .sign__date{
-    display:inline-block;background:var(--terracotta);color:var(--paper);font-family:'Baloo 2';font-weight:700;
-    padding:8px 20px;border-radius:999px;letter-spacing:2px;font-size:.95rem;margin-bottom:6px;
+  .sign h1{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(3.2rem,9vw,5rem);color:var(--ink);line-height:1;margin:0 0 12px;}
+  .sign h1 span{color:var(--terracotta);}
+  .sign__rule{width:64px;height:3px;border-radius:2px;background:var(--mustard);margin:0 auto 22px;}
+  .sign__announce{
+    font-family:'Baloo 2',sans-serif;font-weight:800;text-transform:uppercase;
+    letter-spacing:1.5px;font-size:clamp(1.3rem,3.6vw,1.8rem);color:var(--terracotta);margin:0 0 4px;
   }
-  .hero__cta{margin-top:66px;}
+  .sign__sub{
+    font-family:'Baloo 2',sans-serif;font-weight:600;text-transform:uppercase;
+    letter-spacing:2.5px;font-size:.72rem;color:var(--ink-soft);opacity:.9;margin:0 0 24px;
+  }
+  .sign__divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 14px;max-width:220px;}
+  .sign__divider span{flex:1;height:1px;background:var(--sand-2);}
+  .sign__divider .ic{width:15px;height:15px;color:var(--terracotta);flex-shrink:0;}
+  .sign__date{
+    font-family:'Baloo 2';font-weight:700;letter-spacing:3px;font-size:.9rem;color:var(--ink);margin:0;
+  }
+  .hero__cta{margin-top:66px;display:flex;justify-content:center;}
+
+  /* vibe / concept del matri */
+  .vibe{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;
+    gap:34px 30px;max-width:920px;margin:48px auto 0;
+  }
+  .vibe__item{display:flex;flex-direction:column;align-items:center;gap:10px;width:92px;}
+  .vibe__item .ic{width:32px;height:32px;color:var(--terracotta);}
+  .vibe__item span{font-family:'Caveat',cursive;font-weight:600;font-size:1.2rem;color:var(--olive);line-height:1.1;text-align:center;}
+  .invite-outro{
+    font-family:'Caveat',cursive;font-weight:600;font-size:1.5rem;color:var(--ink);
+    text-align:center;margin:40px 0 0;display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .invite-outro .ic{width:20px;height:20px;color:var(--terracotta);}
 
   /* countdown */
   .countdown{padding:40px 22px 10px;text-align:center;}
@@ -276,6 +306,10 @@
   @media(max-width:480px){
     .sign{padding:40px 20px 32px;}
     .hero__leaf{width:60px;}
+    .vibe{gap:22px 18px;}
+    .vibe__item{width:76px;}
+    .vibe__item .ic{width:26px;height:26px;}
+    .vibe__item span{font-size:1.05rem;}
   }
 </style>
 </head>
@@ -286,6 +320,33 @@
   <defs>
     <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.4" y2="6.4"/><line x1="17.6" y1="17.6" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.4" y2="17.6"/><line x1="17.6" y1="6.4" x2="19.6" y2="4.4"/></g></symbol>
     <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M12 20 C6 15.4 2.6 12 2.6 8.3 C2.6 5.5 4.8 3.4 7.5 3.4 C9 3.4 10.5 4.2 12 5.9 C13.5 4.2 15 3.4 16.5 3.4 C19.2 3.4 21.4 5.5 21.4 8.3 C21.4 12 18 15.4 12 20 Z"/></symbol>
+    <symbol id="ic-toast" viewBox="0 0 24 24">
+      <g>
+        <path d="M3 3 H9.4 L6.2 11.2 L3 3 Z"/>
+        <line x1="6.2" y1="11.2" x2="6.2" y2="18"/>
+        <line x1="3.6" y1="20.3" x2="8.8" y2="20.3"/>
+      </g>
+      <g transform="rotate(20 17.5 11)">
+        <path d="M14.3 4 H20.7 L17.5 12.2 L14.3 4 Z"/>
+        <line x1="17.5" y1="12.2" x2="17.5" y2="19"/>
+        <line x1="14.9" y1="21.3" x2="20.1" y2="21.3"/>
+      </g>
+      <line x1="10.3" y1="5.4" x2="12" y2="3.6"/>
+      <line x1="12" y1="2" x2="12" y2="3.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ic-plate" viewBox="0 0 24 24">
+      <circle cx="12" cy="13" r="7"/>
+      <circle cx="12" cy="13" r="3.1"/>
+      <path d="M3.6 3 V8.4" stroke-linecap="round"/>
+      <path d="M2.4 3 V7.2" stroke-linecap="round"/>
+      <path d="M4.8 3 V7.2" stroke-linecap="round"/>
+      <path d="M3.6 8.4 V21" stroke-linecap="round"/>
+      <path d="M20.4 3 C20.4 6.6 18.8 7.6 18.8 7.6 V21" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ic-waves" viewBox="0 0 24 24">
+      <path d="M1.5 9 C3.8 6.2 6.2 6.2 8.5 9 C10.8 11.8 13.2 11.8 15.5 9 C17.8 6.2 20.2 6.2 22.5 9"/>
+      <path d="M1.5 16 C3.8 13.2 6.2 13.2 8.5 16 C10.8 18.8 13.2 18.8 15.5 16 C17.8 13.2 20.2 13.2 22.5 16"/>
+    </symbol>
     <symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M4 20 C4 11 11 4 20 4 C20 13 13 20 4 20 Z"/><path d="M4.5 19.5 C9 15 13 11 19.5 4.5"/></symbol>
     <symbol id="ic-mountain" viewBox="0 0 24 24"><path d="M2 19 L9 7 L13 13 L16 9 L22 19 Z"/></symbol>
     <symbol id="ic-beer" viewBox="0 0 24 24"><path d="M5 5 H14 V19 A2 2 0 0 1 12 21 H7 A2 2 0 0 1 5 19 Z"/><path d="M14 8 H17 A2 2 0 0 1 19 10 V12 A2 2 0 0 1 17 14 H14"/><line x1="7.5" y1="8.5" x2="7.5" y2="17"/></symbol>
@@ -327,17 +388,24 @@
   <svg class="hero__leaf hero__leaf--tl" viewBox="0 0 24 24" style="color:var(--sage)"><use href="#ic-leaf"/></svg>
   <svg class="hero__leaf hero__leaf--br" viewBox="0 0 24 24" style="color:var(--olive)"><use href="#ic-leaf"/></svg>
   <div class="sign">
+    <svg class="ic sign__deco sign__deco--star1"><use href="#ic-star"/></svg>
+    <svg class="ic sign__deco sign__deco--star2"><use href="#ic-star"/></svg>
+    <svg class="ic sign__deco sign__deco--leaf1"><use href="#ic-leaf"/></svg>
+    <svg class="ic sign__deco sign__deco--leaf2"><use href="#ic-leaf"/></svg>
     <svg class="ic sign__sun"><use href="#ic-sun"/></svg>
-    <p class="sign__date">05 · 12 · 2026</p>
     <h1>Maca <span>&amp;</span> Carlos</h1>
-    <p class="sign__tag">Sin reglas, solo ganas de celebrar y disfrutar juntos.</p>
+    <div class="sign__rule"></div>
+    <p class="sign__announce">Nos casamos.</p>
+    <p class="sign__sub">Y queremos celebrarlo contigo</p>
+    <div class="sign__divider"><span></span><svg class="ic"><use href="#ic-heart"/></svg><span></span></div>
+    <p class="sign__date">05 · 12 · 2026</p>
   </div>
   <figure class="polaroid">
     <img src="hero-propuesta.jpg" alt="La propuesta, Eilean Donan">
     <figcaption>¡Dijo que sí! 💍</figcaption>
   </figure>
   <div class="hero__cta">
-    <a href="#invitacion" class="btn btn--solid">Ver invitación <svg class="ic"><use href="#ic-arrow" style="transform:rotate(90deg)"/></svg></a>
+    <a href="#invitacion" class="btn btn--solid">Ver invitación <svg class="ic ic--rot90"><use href="#ic-arrow"/></svg></a>
   </div>
 </section>
 
@@ -346,11 +414,20 @@
 <section class="section" id="invitacion">
   <div class="container container--narrow center">
     <p class="eyebrow"><svg class="ic"><use href="#ic-heart"/></svg> Queremos invitarte</p>
-    <h2 id="saludoInvitado">Al día más importante de nuestras vidas</h2>
+    <h2 id="saludoInvitado">A celebrar este nuevo<br>capítulo de nuestras vidas</h2>
     <p class="lead">
-      Con mucha alegría queremos compartir contigo el inicio de nuestra nueva vida juntos.
-      Tu presencia haría este día aún más especial.
+      Una celebración relajada, al aire libre, junto a la laguna, rodeados de nuestra
+      familia y amigos, con buena comida, copas, música y muchas ganas de pasarlo bien.
     </p>
+  </div>
+
+  <div class="vibe container">
+    <div class="vibe__item"><svg class="ic"><use href="#ic-leaf"/></svg><span>Naturaleza</span></div>
+    <div class="vibe__item"><svg class="ic"><use href="#ic-sun"/></svg><span>Aire libre</span></div>
+    <div class="vibe__item"><svg class="ic"><use href="#ic-toast"/></svg><span>Buenas copas</span></div>
+    <div class="vibe__item"><svg class="ic"><use href="#ic-plate"/></svg><span>Comida rica</span></div>
+    <div class="vibe__item"><svg class="ic"><use href="#ic-music"/></svg><span>Música y baile</span></div>
+    <div class="vibe__item"><svg class="ic"><use href="#ic-waves"/></svg><span>Laguna</span></div>
   </div>
 
   <div class="countdown" id="countdown">
@@ -362,6 +439,8 @@
       <div class="tag"><span id="cd-sec">00</span><small>Seg</small></div>
     </div>
   </div>
+
+  <p class="invite-outro">¡Nos vemos en la laguna! <svg class="ic"><use href="#ic-heart"/></svg></p>
 </section>
 
 <div class="scallop"></div>
@@ -582,75 +661,4 @@
 
   var PRODUCTS=[
     {id:'luna-de-miel',name:'Luna de miel',desc:'Una noche de hotel o actividad de nuestra luna de miel.',price:100000,emoji:'✈️'},
-    {id:'cena-romantica',name:'Cena romántica',desc:'Una cena especial al volver del viaje, solo los dos.',price:40000,emoji:'🍷'},
-    {id:'nueva-casa',name:'Nuestro nuevo hogar',desc:'Contribuye a equipar la casa en esta nueva etapa.',price:60000,emoji:'🏡'},
-    {id:'detalle-sorpresa',name:'Detalle sorpresa',desc:'Un gesto libre, del monto que tu cariño te permita.',price:20000,emoji:'🎁'}
-  ];
-
-  var STORAGE_KEY='mc_wedding_cart_preview_v1';
-  var PAYMENT_LINK_BASE='https://link.mercadopago.cl/tulinkdepago';
-  var memoryCart=[];var useLS=true;
-  try{var t='__t__';localStorage.setItem(t,'1');localStorage.removeItem(t);}catch(e){useLS=false;}
-  function readCart(){if(!useLS)return memoryCart;try{var r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):[];}catch(e){return memoryCart;}}
-  function writeCart(items){if(!useLS){memoryCart=items;return;}try{localStorage.setItem(STORAGE_KEY,JSON.stringify(items));}catch(e){memoryCart=items;}}
-  function cartAdd(p){var items=readCart();var ex=items.find(function(i){return i.id===p.id;});if(ex){ex.qty+=1;}else{items.push({id:p.id,name:p.name,price:p.price,qty:1});}writeCart(items);renderCart();}
-  function cartRemove(id){writeCart(readCart().filter(function(i){return i.id!==id;}));renderCart();}
-  function cartTotal(){return readCart().reduce(function(s,i){return s+i.price*i.qty;},0);}
-  function cartCount(){return readCart().reduce(function(s,i){return s+i.qty;},0);}
-
-  function renderShop(){
-    var grid=document.getElementById('shopGrid');
-    grid.innerHTML=PRODUCTS.map(function(p){
-      return '<div class="shop__card"><div class="shop__img" style="background:var(--sand-2)">'+p.emoji+'</div>'+
-        '<div class="shop__body"><h3>'+p.name+'</h3><p class="shop__desc">'+p.desc+'</p>'+
-        '<p class="shop__price">'+formatCLP(p.price)+'</p>'+
-        '<button class="shop__add" data-id="'+p.id+'">Agregar</button></div></div>';
-    }).join('');
-    grid.querySelectorAll('.shop__add').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        var p=PRODUCTS.find(function(x){return x.id===btn.dataset.id;});
-        if(!p)return;
-        cartAdd(p);
-        btn.textContent='Agregado ✓';btn.classList.add('is-added');
-        setTimeout(function(){btn.textContent='Agregar';btn.classList.remove('is-added');},1200);
-      });
-    });
-  }
-
-  function renderCart(){
-    var items=readCart();
-    document.getElementById('cartCount').textContent=cartCount();
-    document.getElementById('cartTotal').textContent=formatCLP(cartTotal());
-    document.getElementById('modalTotal').textContent=formatCLP(cartTotal());
-    var itemsEl=document.getElementById('cartItems');
-    if(items.length===0){itemsEl.innerHTML='<p class="cart__empty">Aún no has agregado ningún aporte.</p>';return;}
-    itemsEl.innerHTML=items.map(function(i){
-      return '<div class="cart__item"><div><div class="cart__item-name">'+i.name+(i.qty>1?' × '+i.qty:'')+'</div>'+
-        '<button class="cart__item-remove" data-id="'+i.id+'">Quitar</button></div>'+
-        '<div>'+formatCLP(i.price*i.qty)+'</div></div>';
-    }).join('');
-    itemsEl.querySelectorAll('.cart__item-remove').forEach(function(b){b.addEventListener('click',function(){cartRemove(b.dataset.id);});});
-  }
-
-  renderShop();renderCart();
-
-  var cartDrawer=document.getElementById('cartDrawer'),cartBackdrop=document.getElementById('cartBackdrop');
-  function openCart(){cartDrawer.classList.add('is-open');cartBackdrop.classList.add('is-open');}
-  function closeCart(){cartDrawer.classList.remove('is-open');cartBackdrop.classList.remove('is-open');}
-  document.getElementById('cartToggle').addEventListener('click',openCart);
-  document.getElementById('cartClose').addEventListener('click',closeCart);
-
-  var paymentModal=document.getElementById('paymentModal');
-  var transferInfo=document.getElementById('transferInfo');
-  function openPaymentModal(){
-    if(cartTotal()<=0)return;
-    renderCart();
-    document.getElementById('payCardBtn').href=PAYMENT_LINK_BASE;
-    paymentModal.classList.add('is-open');closeCart();
-  }
-  function closePaymentModal(){paymentModal.classList.remove('is-open');transferInfo.hidden=true;}
-  cartBackdrop.addEventListener('click',function(){closeCart();closePaymentModal();});
-  document.getElementById('cartCheckout').addEventListener('click',openPaymentModal);
-  document.getElementById('paymentClose').addEventListener('click',closePaymentModal);
-  paymentModal.addEventListener('click',function(e){if(e.target===paymentModal)closePaymentModal();});
-  document.getElementById('showTransfer
+    {id:'cena-romantica',
