@@ -199,17 +199,28 @@
   @media(max-width:700px){.event__grid{grid-template-columns:1fr;}}
   .plank{
     background:var(--paper);border-radius:var(--radius);padding:30px 24px;text-align:center;
-    box-shadow:var(--shadow);border-bottom:6px solid var(--wood);
-    display:flex;flex-direction:column;align-items:center;height:100%;
+    box-shadow:var(--shadow);border-bottom:6px solid var(--wood);position:relative;
+    display:flex;flex-direction:column;align-items:center;height:100%;overflow:hidden;
   }
   .plank .ic--big{width:38px;height:38px;color:var(--terracotta);margin-bottom:10px;}
   .plank h3{font-size:1.25rem;}
-  .plank .place{font-weight:700;}
-  .plank .addr{color:var(--ink-soft);font-size:.9rem;}
-  .plank .time{display:inline-block;margin:10px 0;background:var(--mustard);color:#2c2a1e;font-family:'Baloo 2';font-weight:700;padding:4px 14px;border-radius:999px;font-size:.85rem;}
-  .plank .note{font-size:.8rem;font-style:italic;color:var(--ink-soft);}
-  .plank br{flex:1;min-height:14px;}
   .plank .btn{margin-top:auto;}
+  .plank__script{
+    font-family:'Caveat',cursive;font-weight:600;color:var(--ink-soft);
+    font-size:1.15rem;margin:2px 0 20px;display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+  .plank__script .ic{width:16px;height:16px;color:var(--terracotta);}
+  .plank__detail{display:flex;align-items:flex-start;gap:12px;text-align:left;width:100%;max-width:260px;margin:0 0 14px;}
+  .plank__detail .ic{width:20px;height:20px;color:var(--terracotta);flex-shrink:0;margin-top:2px;}
+  .plank__detail strong{display:block;font-family:'Baloo 2';font-weight:700;font-size:.98rem;color:var(--ink);}
+  .plank__detail small{display:block;color:var(--ink-soft);font-size:.82rem;margin-top:1px;}
+  .plank__rule{width:56px;height:2px;background:var(--sand-2);border-radius:2px;margin:6px 0 16px;}
+  .plank__desc{color:var(--ink-soft);font-size:.9rem;max-width:280px;margin:0 0 6px;}
+  .plank__deco-leaf{position:absolute;bottom:20px;left:18px;width:30px;height:30px;color:var(--sage);opacity:.85;transform:rotate(-25deg) scaleX(-1);pointer-events:none;}
+  .swatches{display:flex;align-items:center;justify-content:center;gap:9px;position:relative;margin:14px 0 4px;flex-wrap:wrap;}
+  .swatch{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);}
+  .plank__spark{width:14px;height:14px;color:var(--terracotta);}
+  .plank__note{font-size:.78rem;color:var(--ink-soft);margin:0;}
 
   /* timeline / itinerario */
   .timeline{list-style:none;margin:44px auto 0;padding:0;max-width:520px;position:relative;}
@@ -297,6 +308,7 @@
     background:rgba(30,25,10,.5);opacity:0;pointer-events:none;transition:opacity .25s ease;padding:20px;}
   .modal.is-open{opacity:1;pointer-events:auto;}
   .modal__box{background:var(--paper);max-width:440px;width:100%;padding:34px 30px;position:relative;text-align:center;border-radius:var(--radius);box-shadow:var(--shadow);}
+  .modal__box--form{max-width:480px;max-height:88vh;overflow-y:auto;}
   .modal__close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.1rem;cursor:pointer;}
   .modal__total{margin-bottom:20px;}
   .modal__options{display:flex;flex-direction:column;gap:12px;}
@@ -346,6 +358,31 @@
     <symbol id="ic-waves" viewBox="0 0 24 24">
       <path d="M1.5 9 C3.8 6.2 6.2 6.2 8.5 9 C10.8 11.8 13.2 11.8 15.5 9 C17.8 6.2 20.2 6.2 22.5 9"/>
       <path d="M1.5 16 C3.8 13.2 6.2 13.2 8.5 16 C10.8 18.8 13.2 18.8 15.5 16 C17.8 13.2 20.2 13.2 22.5 16"/>
+    </symbol>
+    <symbol id="ic-sunrise" viewBox="0 0 24 24">
+      <path d="M6 14 A6 6 0 0 1 18 14"/>
+      <line x1="12" y1="3.5" x2="12" y2="6.2"/>
+      <line x1="4.6" y1="8" x2="6.3" y2="9.6"/>
+      <line x1="19.4" y1="8" x2="17.7" y2="9.6"/>
+      <line x1="2" y1="14" x2="22" y2="14"/>
+      <path d="M2 18.2 C4.5 16 6.5 16 9 18.2 C11.5 20.4 13.5 20.4 16 18.2 C18.5 16 20.5 16 22 18.2"/>
+    </symbol>
+    <symbol id="ic-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2.4"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+      <line x1="7.2" y1="2.5" x2="7.2" y2="6.5"/>
+      <line x1="16.8" y1="2.5" x2="16.8" y2="6.5"/>
+    </symbol>
+    <symbol id="ic-hat" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="16.6" rx="9.6" ry="2.3"/>
+      <path d="M6.6 16 C6.1 10 8.6 5.3 12 5.3 C15.4 5.3 17.9 10 17.4 16"/>
+      <line x1="7.3" y1="12.2" x2="16.7" y2="12.2"/>
+    </symbol>
+    <symbol id="ic-hanger" viewBox="0 0 24 24">
+      <circle cx="12" cy="4" r="1.3"/>
+      <path d="M12 5.3 V6.8"/>
+      <path d="M12 6.8 C12 5.6 13 5.6 13 6.8 C13 7.7 21 12.6 21 16.6 A2 2 0 0 1 19 18.6 H5 A2 2 0 0 1 3 16.6 C3 12.6 11 7.7 11 6.8 C11 5.6 12 5.6 12 6.8"/>
+      <line x1="7" y1="16.9" x2="17" y2="16.9"/>
     </symbol>
     <symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M4 20 C4 11 11 4 20 4 C20 13 13 20 4 20 Z"/><path d="M4.5 19.5 C9 15 13 11 19.5 4.5"/></symbol>
     <symbol id="ic-mountain" viewBox="0 0 24 24"><path d="M2 19 L9 7 L13 13 L16 9 L22 19 Z"/></symbol>
@@ -438,6 +475,7 @@
       <div class="tag"><span id="cd-min">00</span><small>Min</small></div>
       <div class="tag"><span id="cd-sec">00</span><small>Seg</small></div>
     </div>
+    <button type="button" class="btn btn--solid" id="openRsvpFromInvite" style="margin:26px auto 0">Confirmar asistencia</button>
   </div>
 
   <p class="invite-outro">¡Nos vemos en la laguna! <svg class="ic"><use href="#ic-heart"/></svg></p>
@@ -471,22 +509,48 @@
   </div>
   <div class="container event__grid">
     <div class="plank">
-      <svg class="ic ic--big"><use href="#ic-heart"/></svg>
-      <h3>Ceremonia</h3>
-      <p class="place">Marina Bosques de Aculeo</p>
-      <p class="addr">Ruta G 562, Fernando Bahamondez, Paine</p>
-      <p class="time">17:00 hrs.</p>
-      <br>
-      <a class="btn btn--outline" id="mapCeremonia" href="https://www.google.com/maps/dir/-33.407327,-70.5630526/Embarcadero+Aculeo+la+marina+-+5345%2BX6,+Paine,+Regi%C3%B3n+Metropolitana/@-33.6377839,-70.7568837,10z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x96631b00108952e7:0x957bce4d0ae9387f!2m2!1d-70.9419504!2d-33.8425123!3e0?entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Abrir mapa</a>
+      <svg class="ic ic--big"><use href="#ic-sunrise"/></svg>
+      <h3>Cuándo y dónde</h3>
+      <p class="plank__script">¡Nos vemos en la laguna! <svg class="ic"><use href="#ic-heart"/></svg></p>
+
+      <div class="plank__detail">
+        <svg class="ic"><use href="#ic-calendar"/></svg>
+        <div><strong>5 de diciembre de 2026</strong><small>17:00 hrs.</small></div>
+      </div>
+      <div class="plank__detail">
+        <svg class="ic"><use href="#ic-pin"/></svg>
+        <div><strong>Marina Bosques de Aculeo</strong><small>Ruta G-562, Fernando Bahamondez, Paine</small></div>
+      </div>
+
+      <div class="plank__rule"></div>
+      <p class="plank__desc">Una ceremonia al aire libre, junto a la laguna, para dar inicio a esta celebración que tanto soñamos.</p>
+
+      <svg class="ic plank__deco-leaf"><use href="#ic-leaf"/></svg>
+
+      <a class="btn btn--outline" id="mapCeremonia" href="https://www.google.com/maps/dir/-33.407327,-70.5630526/Embarcadero+Aculeo+la+marina+-+5345%2BX6,+Paine,+Regi%C3%B3n+Metropolitana/@-33.6377839,-70.7568837,10z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x96631b00108952e7:0x957bce4d0ae9387f!2m2!1d-70.9419504!2d-33.8425123!3e0?entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Abrir mapa <svg class="ic"><use href="#ic-pin"/></svg></a>
     </div>
     <div class="plank">
-      <svg class="ic ic--big"><use href="#ic-star"/></svg>
-      <h3>Vestimenta</h3>
-      <p class="place">Casual elegante / boho</p>
-      <p class="addr">Piensa en tonos tierra — evita el blanco y el beige, van para la novia.</p>
-      <p class="note">Habrá pasto y tierra: zapato cómodo se agradece 🌿</p>
-      <br>
-      <a class="btn btn--outline" href="https://pin.it/749HIWBfR" target="_blank" rel="noopener">Algunas ideas</a>
+      <svg class="ic ic--big"><use href="#ic-hat"/></svg>
+      <h3>¿Qué me pongo?</h3>
+      <p class="plank__script">Semiformal, pero a nuestra manera.</p>
+
+      <p class="plank__desc">Queremos que estés cómodo, con ropa linda y quizás con un toque campestre.
+      Habrá pasto, tierra y muuucho baile! así que elige algo con lo que puedas disfrutar de principio a fin.</p>
+
+      <div class="swatches">
+        <span class="swatch" style="background:#e2a084"></span>
+        <span class="swatch" style="background:var(--terracotta)"></span>
+        <span class="swatch" style="background:var(--mustard)"></span>
+        <span class="swatch" style="background:var(--olive)"></span>
+        <span class="swatch" style="background:var(--sage)"></span>
+        <span class="swatch" style="background:#f0d7c9"></span>
+        <svg class="ic plank__spark"><use href="#ic-star"/></svg>
+      </div>
+
+      <p class="plank__script" style="margin-top:14px">¡Queremos vida y colores ese día! <svg class="ic"><use href="#ic-heart"/></svg></p>
+      <p class="plank__note">Evita los colores oscuros.</p>
+
+      <a class="btn btn--outline" href="https://pin.it/749HIWBfR" target="_blank" rel="noopener">Algunas ideas <svg class="ic"><use href="#ic-hanger"/></svg></a>
     </div>
   </div>
 </section>
@@ -552,43 +616,11 @@
 
 <section class="section" id="rsvp">
   <div class="container container--narrow">
-    <div class="note-card">
-      <div class="center">
-        <p class="eyebrow" style="justify-content:center"><svg class="ic"><use href="#ic-check"/></svg> RSVP</p>
-        <h2>Confirma tu asistencia</h2>
-        <p class="lead">Por favor confirma antes del <strong>20 de octubre de 2026</strong>.</p>
-      </div>
-      <form id="rsvpForm" class="form" novalidate>
-        <div class="form__row">
-          <label for="rsvpName">Nombre y apellido *</label>
-          <input type="text" id="rsvpName" name="nombre" required>
-        </div>
-        <div class="form__row">
-          <label for="rsvpAttend">¿Asistirás? *</label>
-          <select id="rsvpAttend" name="asistencia" required>
-            <option value="">Selecciona una opción</option>
-            <option value="Sí, asistiré">Sí, asistiré</option>
-            <option value="No podré asistir">No podré asistir</option>
-          </select>
-        </div>
-        <div class="form__row">
-          <label for="rsvpGuests">Número de personas (incluyéndote) *</label>
-          <select id="rsvpGuests" name="acompanantes" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-        </div>
-        <div class="form__row">
-          <label for="rsvpDiet">Restricciones alimentarias o alergias</label>
-          <input type="text" id="rsvpDiet" name="alergias" placeholder="Ej: vegetariano, sin gluten, ninguna">
-        </div>
-        <div class="form__row">
-          <label for="rsvpMsg">Mensaje para los novios</label>
-          <textarea id="rsvpMsg" name="mensaje" rows="4"></textarea>
-        </div>
-        <button type="submit" class="btn btn--solid" id="rsvpSubmit" style="justify-content:center">Enviar confirmación</button>
-        <p class="form__status" id="rsvpStatus" role="status"></p>
-      </form>
+    <div class="note-card center">
+      <p class="eyebrow" style="justify-content:center"><svg class="ic"><use href="#ic-check"/></svg> RSVP</p>
+      <h2>Confirma tu asistencia</h2>
+      <p class="lead">Por favor confirma antes del <strong>20 de octubre de 2026</strong>.</p>
+      <button type="button" class="btn btn--solid" id="openRsvpFromSection" style="justify-content:center;margin:6px auto 0">Confirmar asistencia</button>
       <p class="fine-print">Evento solo para adultos. Agradecemos tu comprensión.</p>
     </div>
   </div>
@@ -610,6 +642,49 @@
   <button class="btn btn--solid cart__checkout" id="cartCheckout">Continuar al pago</button>
 </aside>
 <div class="cart__backdrop" id="cartBackdrop"></div>
+
+<div class="modal" id="rsvpModal" aria-hidden="true">
+  <div class="modal__box modal__box--form">
+    <button class="modal__close" id="rsvpModalClose" aria-label="Cerrar"><svg class="ic"><use href="#ic-close"/></svg></button>
+    <div class="center">
+      <p class="eyebrow" style="justify-content:center"><svg class="ic"><use href="#ic-check"/></svg> RSVP</p>
+      <h3 style="margin:0 0 8px">Confirma tu asistencia</h3>
+      <p class="lead" style="margin:0 0 4px">Por favor confirma antes del <strong>20 de octubre de 2026</strong>.</p>
+    </div>
+    <form id="rsvpForm" class="form" novalidate>
+      <div class="form__row">
+        <label for="rsvpName">Nombre y apellido *</label>
+        <input type="text" id="rsvpName" name="nombre" required>
+      </div>
+      <div class="form__row">
+        <label for="rsvpAttend">¿Asistirás? *</label>
+        <select id="rsvpAttend" name="asistencia" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Sí, asistiré">Sí, asistiré</option>
+          <option value="No podré asistir">No podré asistir</option>
+        </select>
+      </div>
+      <div class="form__row">
+        <label for="rsvpGuests">Número de personas (incluyéndote) *</label>
+        <select id="rsvpGuests" name="acompanantes" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+      <div class="form__row">
+        <label for="rsvpDiet">Restricciones alimentarias o alergias</label>
+        <input type="text" id="rsvpDiet" name="alergias" placeholder="Ej: vegetariano, sin gluten, ninguna">
+      </div>
+      <div class="form__row">
+        <label for="rsvpMsg">Mensaje para los novios</label>
+        <textarea id="rsvpMsg" name="mensaje" rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn btn--solid" id="rsvpSubmit" style="justify-content:center">Enviar confirmación</button>
+      <p class="form__status" id="rsvpStatus" role="status"></p>
+    </form>
+    <p class="fine-print">Evento solo para adultos. Agradecemos tu comprensión.</p>
+  </div>
+</div>
 
 <div class="modal" id="paymentModal" aria-hidden="true">
   <div class="modal__box">
@@ -661,4 +736,177 @@
 
   var PRODUCTS=[
     {id:'luna-de-miel',name:'Luna de miel',desc:'Una noche de hotel o actividad de nuestra luna de miel.',price:100000,emoji:'✈️'},
-    {id:'cena-romantica',
+    {id:'cena-romantica',name:'Cena romántica',desc:'Una cena especial al volver del viaje, solo los dos.',price:40000,emoji:'🍷'},
+    {id:'nueva-casa',name:'Nuestro nuevo hogar',desc:'Contribuye a equipar la casa en esta nueva etapa.',price:60000,emoji:'🏡'},
+    {id:'detalle-sorpresa',name:'Detalle sorpresa',desc:'Un gesto libre, del monto que tu cariño te permita.',price:20000,emoji:'🎁'}
+  ];
+
+  var STORAGE_KEY='mc_wedding_cart_preview_v1';
+  var PAYMENT_LINK_BASE='https://link.mercadopago.cl/tulinkdepago';
+  var memoryCart=[];var useLS=true;
+  try{var t='__t__';localStorage.setItem(t,'1');localStorage.removeItem(t);}catch(e){useLS=false;}
+  function readCart(){if(!useLS)return memoryCart;try{var r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):[];}catch(e){return memoryCart;}}
+  function writeCart(items){if(!useLS){memoryCart=items;return;}try{localStorage.setItem(STORAGE_KEY,JSON.stringify(items));}catch(e){memoryCart=items;}}
+  function cartAdd(p){var items=readCart();var ex=items.find(function(i){return i.id===p.id;});if(ex){ex.qty+=1;}else{items.push({id:p.id,name:p.name,price:p.price,qty:1});}writeCart(items);renderCart();}
+  function cartRemove(id){writeCart(readCart().filter(function(i){return i.id!==id;}));renderCart();}
+  function cartTotal(){return readCart().reduce(function(s,i){return s+i.price*i.qty;},0);}
+  function cartCount(){return readCart().reduce(function(s,i){return s+i.qty;},0);}
+
+  function renderShop(){
+    var grid=document.getElementById('shopGrid');
+    grid.innerHTML=PRODUCTS.map(function(p){
+      return '<div class="shop__card"><div class="shop__img" style="background:var(--sand-2)">'+p.emoji+'</div>'+
+        '<div class="shop__body"><h3>'+p.name+'</h3><p class="shop__desc">'+p.desc+'</p>'+
+        '<p class="shop__price">'+formatCLP(p.price)+'</p>'+
+        '<button class="shop__add" data-id="'+p.id+'">Agregar</button></div></div>';
+    }).join('');
+    grid.querySelectorAll('.shop__add').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var p=PRODUCTS.find(function(x){return x.id===btn.dataset.id;});
+        if(!p)return;
+        cartAdd(p);
+        btn.textContent='Agregado ✓';btn.classList.add('is-added');
+        setTimeout(function(){btn.textContent='Agregar';btn.classList.remove('is-added');},1200);
+      });
+    });
+  }
+
+  function renderCart(){
+    var items=readCart();
+    document.getElementById('cartCount').textContent=cartCount();
+    document.getElementById('cartTotal').textContent=formatCLP(cartTotal());
+    document.getElementById('modalTotal').textContent=formatCLP(cartTotal());
+    var itemsEl=document.getElementById('cartItems');
+    if(items.length===0){itemsEl.innerHTML='<p class="cart__empty">Aún no has agregado ningún aporte.</p>';return;}
+    itemsEl.innerHTML=items.map(function(i){
+      return '<div class="cart__item"><div><div class="cart__item-name">'+i.name+(i.qty>1?' × '+i.qty:'')+'</div>'+
+        '<button class="cart__item-remove" data-id="'+i.id+'">Quitar</button></div>'+
+        '<div>'+formatCLP(i.price*i.qty)+'</div></div>';
+    }).join('');
+    itemsEl.querySelectorAll('.cart__item-remove').forEach(function(b){b.addEventListener('click',function(){cartRemove(b.dataset.id);});});
+  }
+
+  renderShop();renderCart();
+
+  var cartDrawer=document.getElementById('cartDrawer'),cartBackdrop=document.getElementById('cartBackdrop');
+  function openCart(){cartDrawer.classList.add('is-open');cartBackdrop.classList.add('is-open');}
+  function closeCart(){cartDrawer.classList.remove('is-open');cartBackdrop.classList.remove('is-open');}
+  document.getElementById('cartToggle').addEventListener('click',openCart);
+  document.getElementById('cartClose').addEventListener('click',closeCart);
+
+  var paymentModal=document.getElementById('paymentModal');
+  var transferInfo=document.getElementById('transferInfo');
+  function openPaymentModal(){
+    if(cartTotal()<=0)return;
+    renderCart();
+    document.getElementById('payCardBtn').href=PAYMENT_LINK_BASE;
+    paymentModal.classList.add('is-open');closeCart();
+  }
+  function closePaymentModal(){paymentModal.classList.remove('is-open');transferInfo.hidden=true;}
+  cartBackdrop.addEventListener('click',function(){closeCart();closePaymentModal();});
+  document.getElementById('cartCheckout').addEventListener('click',openPaymentModal);
+  document.getElementById('paymentClose').addEventListener('click',closePaymentModal);
+  paymentModal.addEventListener('click',function(e){if(e.target===paymentModal)closePaymentModal();});
+  document.getElementById('showTransferBtn').addEventListener('click',function(){transferInfo.hidden=!transferInfo.hidden;});
+  document.getElementById('copyTransfer').addEventListener('click',function(){
+    var btn=this;
+    if(navigator.clipboard){navigator.clipboard.writeText(transferInfo.innerText).then(function(){btn.textContent='Copiado ✓';setTimeout(function(){btn.textContent='Copiar datos';},1500);});}
+  });
+
+  // RSVP
+  var form=document.getElementById('rsvpForm');
+  var statusEl=document.getElementById('rsvpStatus');
+  var submitBtn=document.getElementById('rsvpSubmit');
+  var params=new URLSearchParams(window.location.search);
+  var invitados=params.get('invitados');
+  var guestSelect=document.getElementById('rsvpGuests');
+  if(invitados&&guestSelect){
+    var val=String(parseInt(invitados,10)||1);
+    var opt=guestSelect.querySelector('option[value="'+val+'"]');
+    if(opt)guestSelect.value=val;
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    statusEl.textContent='';
+    var data=new FormData(form);
+    var nombre=data.get('nombre'),asistencia=data.get('asistencia');
+    if(!nombre||!asistencia){statusEl.textContent='Por favor completa los campos obligatorios.';return;}
+    statusEl.textContent='¡Gracias '+nombre+'! (vista previa: aún falta conectar Google Sheets)';
+    form.reset();
+    setTimeout(closeRsvpModal,2200);
+  });
+
+  // Modal de RSVP (se abre desde el botón de "Confirmar asistencia" en la invitación y en la sección RSVP)
+  var rsvpModal=document.getElementById('rsvpModal');
+  function openRsvpModal(){rsvpModal.classList.add('is-open');rsvpModal.setAttribute('aria-hidden','false');}
+  function closeRsvpModal(){rsvpModal.classList.remove('is-open');rsvpModal.setAttribute('aria-hidden','true');}
+  ['openRsvpFromInvite','openRsvpFromSection'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.addEventListener('click',openRsvpModal);
+  });
+  document.getElementById('rsvpModalClose').addEventListener('click',closeRsvpModal);
+  rsvpModal.addEventListener('click',function(e){if(e.target===rsvpModal)closeRsvpModal();});
+
+  document.getElementById('photoAlbumLink').href='https://photos.app.goo.gl/REEMPLAZAR_CON_TU_ALBUM';
+
+  // Carrusel de galería (coverflow: centro nítido, laterales difuminados, avanza hacia la derecha)
+  var viewport=document.getElementById('carouselViewport');
+  var dotsWrap=document.getElementById('carouselDots');
+  if(viewport&&dotsWrap){
+    var slides=Array.prototype.slice.call(viewport.querySelectorAll('.carousel__slide'));
+    var total=slides.length;
+    var current=0;
+    var dots=[];
+    slides.forEach(function(_,i){
+      var dot=document.createElement('button');
+      dot.className='carousel__dot'+(i===0?' is-active':'');
+      dot.setAttribute('aria-label','Ir a la foto '+(i+1));
+      dot.addEventListener('click',function(){goTo(i);resetTimer();});
+      dotsWrap.appendChild(dot);
+      dots.push(dot);
+    });
+
+    function render(){
+      var isMobile=window.innerWidth<=600;
+      var step=isMobile?100:150;      // separación entre centro y laterales
+      var farStep=isMobile?175:270;   // posición de las que están saliendo/entrando
+      slides.forEach(function(slide,i){
+        var r=i-current;
+        if(r>total/2)r-=total;
+        if(r<-total/2)r+=total;
+        var x=0,scale=1,blur=0,opacity=1,z=3,pe='auto';
+        if(r===0){
+          x=0;scale=1;blur=0;opacity=1;z=3;
+        }else if(r===-1||r===1){
+          x=r*step;scale=.78;blur=2.5;opacity=.55;z=2;pe='none';
+        }else if(r===-2||r===2){
+          x=r*farStep/2;scale=.55;blur=4;opacity=0;z=1;pe='none';
+        }else{
+          x=(r<0?-1:1)*farStep;scale=.5;blur=4;opacity=0;z=0;pe='none';
+        }
+        slide.style.transform='translate(-50%,-50%) translateX('+x+'px) scale('+scale+')';
+        slide.style.filter=blur?'blur('+blur+'px)':'none';
+        slide.style.opacity=opacity;
+        slide.style.zIndex=z;
+        slide.style.pointerEvents=pe;
+      });
+      dots.forEach(function(d,idx){d.classList.toggle('is-active',idx===current);});
+    }
+    function goTo(i){
+      current=((i%total)+total)%total;
+      render();
+    }
+    var timer;
+    function resetTimer(){
+      clearInterval(timer);
+      timer=setInterval(function(){goTo(current-1);},3000); // -1 = las fotos corren hacia la derecha
+    }
+    render();
+    resetTimer();
+    window.addEventListener('resize',render);
+  }
+})();
+</script>
+
+</body>
+</html>
