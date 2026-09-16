@@ -192,15 +192,23 @@
   }
   .timeline__time{font-family:'Baloo 2';font-weight:700;color:var(--olive);min-width:58px;}
 
-  /* gallery carousel */
-  .carousel{position:relative;max-width:560px;margin:44px auto 0;}
-  .carousel__viewport{overflow:hidden;border-radius:14px;box-shadow:var(--shadow);aspect-ratio:1/1;background:var(--sand);}
-  .carousel__track{display:flex;height:100%;transition:transform .6s ease;}
-  .carousel__slide{flex:0 0 100%;height:100%;}
+  /* gallery carousel (coverflow: centro nítido, laterales difuminados) */
+  .carousel{position:relative;max-width:640px;margin:44px auto 0;}
+  .carousel__viewport{position:relative;height:240px;overflow:hidden;}
+  .carousel__slide{
+    position:absolute;top:50%;left:50%;width:190px;height:190px;
+    border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:var(--sand);
+    transition:transform .9s cubic-bezier(.45,0,.2,1), opacity .9s ease, filter .9s ease;
+    will-change:transform,opacity,filter;
+  }
   .gallery__img{width:100%;height:100%;object-fit:cover;display:block;}
-  .carousel__dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+  .carousel__dots{display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap;}
   .carousel__dot{width:9px;height:9px;border-radius:50%;background:var(--sand-2);border:none;padding:0;cursor:pointer;transition:.2s;}
   .carousel__dot.is-active{background:var(--terracotta);transform:scale(1.25);}
+  @media(max-width:600px){
+    .carousel__viewport{height:180px;}
+    .carousel__slide{width:140px;height:140px;}
+  }
 
   /* shop */
   .shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:44px;}
@@ -429,17 +437,15 @@
     <p class="lead">Un poco de nuestras aventuras por el mundo antes del gran día.</p>
   </div>
   <div class="carousel container">
-    <div class="carousel__viewport">
-      <div class="carousel__track" id="carouselTrack">
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-1.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-2.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-3.jpg" alt="Maca y Carlos en el castillo Eilean Donan"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-4.jpg" alt="Maca y Carlos en Edimburgo"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-5.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-6.jpg" alt="Maca y Carlos en el teleférico"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-7.jpg" alt="Maca y Carlos en el teleférico"></div>
-        <div class="carousel__slide"><img class="gallery__img" src="galeria-8.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-      </div>
+    <div class="carousel__viewport" id="carouselViewport">
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-1.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-2.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-3.jpg" alt="Maca y Carlos en el castillo Eilean Donan"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-4.jpg" alt="Maca y Carlos en Edimburgo"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-5.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-6.jpg" alt="Maca y Carlos en el teleférico"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-7.jpg" alt="Maca y Carlos en el teleférico"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="galeria-8.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
     </div>
     <div class="carousel__dots" id="carouselDots"></div>
   </div>
@@ -647,7 +653,4 @@
   document.getElementById('cartCheckout').addEventListener('click',openPaymentModal);
   document.getElementById('paymentClose').addEventListener('click',closePaymentModal);
   paymentModal.addEventListener('click',function(e){if(e.target===paymentModal)closePaymentModal();});
-  document.getElementById('showTransferBtn').addEventListener('click',function(){transferInfo.hidden=!transferInfo.hidden;});
-  document.getElementById('copyTransfer').addEventListener('click',function(){
-    var btn=this;
-    if(navigator.clipboard){navigator.clipboard.writeText(transferInfo
+  document.getElementById('showTransfer
