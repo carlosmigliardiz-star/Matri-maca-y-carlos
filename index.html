@@ -27,6 +27,7 @@
   }
 
   *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     margin:0;
     background:var(--cream);
@@ -83,12 +84,49 @@
   .nav__cta{background:var(--terracotta);padding:8px 16px;border-radius:999px;}
   .nav__cart{background:none;border:none;color:var(--cream);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;gap:4px;}
   .nav__toggle{display:none;background:none;border:none;color:var(--cream);cursor:pointer;padding:6px;}
+  .nav__menu-close{display:none;}
+  .navmenu__backdrop{position:fixed;inset:0;background:rgba(30,25,10,.45);z-index:499;opacity:0;pointer-events:none;transition:opacity .3s ease;}
+  .navmenu__backdrop.is-open{opacity:1;pointer-events:auto;}
   @media (max-width:820px){
     .nav__toggle{display:block;}
     .nav__menu{position:fixed;top:0;right:-100%;height:100vh;width:min(300px,84vw);
       background:var(--olive);flex-direction:column;align-items:flex-start;justify-content:center;
       gap:22px;padding:40px;transition:right .3s ease;}
     .nav__menu.is-open{right:0;}
+    .nav__menu-close{
+      display:flex;align-items:center;justify-content:center;position:absolute;top:18px;right:18px;
+      width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);border:none;
+      color:var(--paper);cursor:pointer;
+    }
+    .nav__menu-close .ic{width:18px;height:18px;}
+    .nav__menu-close:hover{background:rgba(255,255,255,.24);}
+  }
+
+  /* floating quick-nav bar */
+  .floatnav{
+    position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:2px;max-width:calc(100vw - 24px);
+    background:var(--olive);border-radius:999px;padding:7px 8px;
+    box-shadow:0 12px 28px rgba(40,30,10,.3);z-index:600;
+    overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .floatnav::-webkit-scrollbar{display:none;}
+  .floatnav a,.floatnav__cta{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    color:var(--paper);text-decoration:none;background:none;border:none;cursor:pointer;
+    font-family:'Baloo 2',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;
+    padding:7px 10px;border-radius:16px;transition:background .2s ease,color .2s ease;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .floatnav a .ic,.floatnav__cta .ic{width:18px;height:18px;}
+  .floatnav a:hover,.floatnav__cta:hover{background:rgba(255,255,255,.14);}
+  .floatnav a.is-active{background:var(--mustard);color:var(--ink);}
+  .floatnav__cta{background:var(--terracotta);}
+  .floatnav__cta:hover{background:var(--terracotta);filter:brightness(1.08);}
+  @media(max-width:480px){
+    .floatnav{gap:0;padding:6px;bottom:14px;}
+    .floatnav a,.floatnav__cta{padding:6px 8px;font-size:.56rem;}
+    .floatnav a .ic,.floatnav__cta .ic{width:16px;height:16px;}
   }
 
   /* bunting divider */
@@ -105,7 +143,7 @@
   .scallop--flip{transform:rotate(180deg);}
 
   /* hero */
-  .hero{padding:56px 22px 0;text-align:center;position:relative;}
+  .hero{padding:56px 22px 60px;text-align:center;position:relative;}
   .hero__leaf{position:absolute;width:90px;opacity:.8;}
   .hero__leaf--tl{top:20px;left:6%;transform:rotate(-15deg);}
   .hero__leaf--br{bottom:-10px;right:6%;transform:rotate(200deg);}
@@ -138,7 +176,6 @@
   .sign__date{
     font-family:'Baloo 2';font-weight:700;letter-spacing:3px;font-size:.9rem;color:var(--ink);margin:0;
   }
-  .hero__cta{margin-top:66px;display:flex;justify-content:center;}
 
   /* vibe / concept del matri */
   .vibe{
@@ -293,26 +330,44 @@
   .carousel__dots{display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap;}
   .carousel__dot{width:9px;height:9px;border-radius:50%;background:var(--sand-2);border:none;padding:0;cursor:pointer;transition:.2s;}
   .carousel__dot.is-active{background:var(--terracotta);transform:scale(1.25);}
+  .carousel-arrow{
+    position:absolute;top:50%;right:6px;transform:translateY(-50%);
+    width:44px;height:44px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);
+    border:none;color:var(--terracotta);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;z-index:10;transition:background .2s ease,color .2s ease;
+  }
+  .carousel-arrow .ic{width:20px;height:20px;}
+  .carousel-arrow:hover{background:var(--olive);color:var(--paper);}
   @media(max-width:600px){
     .carousel__viewport{height:180px;}
     .carousel__slide{width:140px;height:140px;}
+    .carousel-arrow{width:38px;height:38px;right:2px;}
+    .carousel-arrow .ic{width:17px;height:17px;}
   }
 
   /* shop */
   .shop-scroll{position:relative;margin-top:44px;}
+  .shop-scroll::before,.shop-scroll::after{
+    content:'';position:absolute;top:4px;bottom:34px;width:60px;z-index:4;pointer-events:none;
+  }
+  .shop-scroll::before{left:0;background:linear-gradient(to right, var(--sand), rgba(236,220,184,0));}
+  .shop-scroll::after{right:0;background:linear-gradient(to left, var(--sand), rgba(236,220,184,0));}
   .shop{
-    display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;
-    margin:0;padding:4px 4px 14px;scrollbar-width:none;-ms-overflow-style:none;
+    display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;
+    margin:0;padding:4px 4px 14px;scrollbar-width:none;-ms-overflow-style:none;align-items:stretch;
   }
   .shop::-webkit-scrollbar{display:none;}
   .shop__card{
-    flex:0 0 210px;scroll-snap-align:start;
+    flex:0 0 236px;scroll-snap-align:start;
     background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
   }
-  .shop__img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--sand),var(--sand-2));}
+  .shop__img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--sand),var(--sand-2));flex-shrink:0;}
   .shop__icon{width:2.5rem;height:2.5rem;color:var(--terracotta);stroke-width:1.35;}
   .shop__body{padding:16px 16px 20px;display:flex;flex-direction:column;gap:6px;flex:1;}
-  .shop__body h3{font-size:.98rem;margin:0;line-height:1.32;}
+  .shop__body h3{
+    font-size:.98rem;margin:0;line-height:1.32;min-height:2.64em;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;
+  }
   .shop__desc{font-size:.8rem;color:var(--ink-soft);flex:1;font-style:italic;min-height:1em;}
   .shop__price{font-family:'Baloo 2';font-weight:700;color:var(--terracotta);font-size:1.1rem;}
   .shop__add{
@@ -322,17 +377,22 @@
   .shop__add:hover{background:var(--olive);color:var(--paper);}
   .shop__add.is-added{background:var(--mustard);border-color:var(--mustard);color:#2c2a1e;}
   .shop-arrow{
-    position:absolute;top:50%;right:0;transform:translateY(-50%);
-    width:50px;height:50px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);
+    position:absolute;top:calc(50% - 15px);transform:translateY(-50%);
+    width:44px;height:44px;border-radius:50%;background:var(--paper);box-shadow:var(--shadow);
     border:none;color:var(--terracotta);display:flex;align-items:center;justify-content:center;
     cursor:pointer;z-index:5;transition:background .2s ease,color .2s ease;
   }
-  .shop-arrow .ic{width:22px;height:22px;}
+  .shop-arrow--next{right:4px;}
+  .shop-arrow--prev{left:4px;}
+  .shop-arrow .ic{width:20px;height:20px;}
   .shop-arrow:hover{background:var(--olive);color:var(--paper);}
   @media(max-width:600px){
-    .shop__card{flex:0 0 180px;}
-    .shop-arrow{width:42px;height:42px;right:2px;}
-    .shop-arrow .ic{width:18px;height:18px;}
+    .shop-scroll::before,.shop-scroll::after{width:36px;}
+    .shop__card{flex:0 0 188px;}
+    .shop-arrow{width:38px;height:38px;}
+    .shop-arrow--next{right:0;}
+    .shop-arrow--prev{left:0;}
+    .shop-arrow .ic{width:17px;height:17px;}
   }
 
   /* form */
@@ -351,7 +411,7 @@
   .form__status{min-height:1.4em;font-size:.9rem;color:var(--olive);font-weight:700;}
   .fine-print{font-size:.78rem;color:var(--ink-soft);text-align:center;margin-top:26px;}
 
-  .footer{background:var(--ink);color:var(--sand);text-align:center;padding:44px 22px 34px;}
+  .footer{background:var(--ink);color:var(--sand);text-align:center;padding:44px 22px 90px;}
   .footer__names{font-family:'Caveat',cursive;font-size:2rem;color:var(--cream);margin-bottom:2px;}
   .footer__date{letter-spacing:3px;color:var(--mustard);font-size:.85rem;margin-bottom:10px;}
   .footer__note{font-size:.8rem;opacity:.8;}
@@ -495,6 +555,7 @@
     <symbol id="ic-arrow" viewBox="0 0 24 24"><line x1="3" y1="12" x2="18" y2="12"/><path d="M12 6 L18 12 L12 18"/></symbol>
     <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4 12 L9.5 17.5 L20 6"/></symbol>
     <symbol id="ic-close" viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></symbol>
+    <symbol id="ic-menu" viewBox="0 0 24 24"><line x1="3.5" y1="6.5" x2="20.5" y2="6.5"/><line x1="3.5" y1="12" x2="20.5" y2="12"/><line x1="3.5" y1="17.5" x2="20.5" y2="17.5"/></symbol>
     <symbol id="ic-bag" viewBox="0 0 24 24"><path d="M5.5 8 H18.5 L17.5 20 H6.5 Z"/><path d="M9 8 V6 A3 3 0 0 1 15 6 V8"/></symbol>
     <symbol id="ic-gift" viewBox="0 0 24 24"><rect x="3" y="9.5" width="18" height="11" rx="1"/><path d="M2.5 9.5 H21.5 V13 H2.5 Z"/><line x1="12" y1="9.5" x2="12" y2="20.5"/><path d="M12 9.5 C8.5 9.5 7.2 5 12 5 C16.8 5 15.5 9.5 12 9.5 Z"/></symbol>
 
@@ -588,9 +649,12 @@
   <div class="nav__inner">
     <a href="#top" class="nav__brand">Maca &amp; Carlos</a>
     <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
-      <svg class="ic" style="width:26px;height:26px"><use href="#ic-arrow"/></svg>
+      <svg class="ic" style="width:26px;height:26px"><use href="#ic-menu" id="navToggleIcon"/></svg>
     </button>
     <nav class="nav__menu" id="navMenu">
+      <button type="button" class="nav__menu-close" id="navMenuClose" aria-label="Cerrar menú">
+        <svg class="ic"><use href="#ic-close"/></svg>
+      </button>
       <a href="#historia">Historia</a>
       <a href="#evento">El evento</a>
       <a href="#alojamiento">Alojamiento</a>
@@ -604,6 +668,17 @@
     </nav>
   </div>
 </header>
+<div class="navmenu__backdrop" id="navMenuBackdrop"></div>
+
+<nav class="floatnav" id="floatNav" aria-label="Navegación rápida">
+  <a href="#historia" data-section="historia"><svg class="ic"><use href="#ic-star"/></svg><span>Historia</span></a>
+  <a href="#evento" data-section="evento"><svg class="ic"><use href="#ic-pin"/></svg><span>Evento</span></a>
+  <a href="#alojamiento" data-section="alojamiento"><svg class="ic"><use href="#ic-bed"/></svg><span>Alojar</span></a>
+  <a href="#itinerario" data-section="itinerario"><svg class="ic"><use href="#ic-music"/></svg><span>Día</span></a>
+  <a href="#galeria" data-section="galeria"><svg class="ic"><use href="#ic-camera"/></svg><span>Fotos</span></a>
+  <a href="#regalos" data-section="regalos"><svg class="ic"><use href="#ic-gift"/></svg><span>Regalos</span></a>
+  <button type="button" class="floatnav__cta" id="floatRsvp"><svg class="ic"><use href="#ic-check"/></svg><span>Confirmar</span></button>
+</nav>
 
 <section class="hero" id="top">
   <svg class="hero__leaf hero__leaf--tl" viewBox="0 0 24 24" style="color:var(--sage)"><use href="#ic-leaf"/></svg>
@@ -622,12 +697,9 @@
     <p class="sign__date">05 · 12 · 2026</p>
   </div>
   <figure class="polaroid">
-    <img src="hero-propuesta.jpg" alt="La propuesta, Eilean Donan">
+    <img src="assets/couple/hero-propuesta.jpg" alt="La propuesta, Eilean Donan">
     <figcaption>¡Dijo que sí! 💍</figcaption>
   </figure>
-  <div class="hero__cta">
-    <a href="#invitacion" class="btn btn--solid">Ver invitación <svg class="ic ic--rot90"><use href="#ic-arrow"/></svg></a>
-  </div>
 </section>
 
 <div class="bunting"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -659,7 +731,6 @@
       <div class="tag"><span id="cd-min">00</span><small>Min</small></div>
       <div class="tag"><span id="cd-sec">00</span><small>Seg</small></div>
     </div>
-    <button type="button" class="btn btn--solid" id="openRsvpFromInvite" style="margin:26px auto 0">Confirmar asistencia</button>
   </div>
 
   <p class="invite-outro">¡Nos vemos en la laguna! <svg class="ic"><use href="#ic-heart"/></svg></p>
@@ -670,7 +741,7 @@
 <section class="section section--sand" id="historia">
   <div class="container story__grid">
     <div class="photo-frame">
-      <img src="historia.jpg" alt="Maca y Carlos">
+      <img src="assets/couple/historia.jpg" alt="Maca y Carlos">
     </div>
     <div>
       <p class="eyebrow"><svg class="ic"><use href="#ic-star"/></svg> Nuestra historia</p>
@@ -810,22 +881,26 @@
   <div class="container center">
     <p class="eyebrow" style="justify-content:center"><svg class="ic"><use href="#ic-camera"/></svg> Recuerdos</p>
     <h2>Algunos de nuestros momentos</h2>
-    <p class="lead">Un poco de nuestras aventuras por el mundo antes del gran día.</p>
+    <p class="lead">Un poco de nuestras aventuras por el mundo antes del gran día: cada viaje fue un capítulo más de esta historia que seguimos escribiendo juntos.</p>
   </div>
   <div class="carousel container">
     <div class="carousel__viewport" id="carouselViewport">
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-1.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-2.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-3.jpg" alt="Maca y Carlos en el castillo Eilean Donan"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-4.jpg" alt="Maca y Carlos en Edimburgo"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-5.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-6.jpg" alt="Maca y Carlos en el teleférico"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-7.jpg" alt="Maca y Carlos en el teleférico"></div>
-      <div class="carousel__slide"><img class="gallery__img" src="galeria-8.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-1.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-2.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-3.jpg" alt="Maca y Carlos en el castillo Eilean Donan"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-4.jpg" alt="Maca y Carlos en Edimburgo"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-5.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-6.jpg" alt="Maca y Carlos en el teleférico"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-7.jpg" alt="Maca y Carlos en el teleférico"></div>
+      <div class="carousel__slide"><img class="gallery__img" src="assets/couple/galeria-8.jpg" alt="Maca y Carlos en Zhangjiajie"></div>
+      <button type="button" class="carousel-arrow" id="carouselArrow" aria-label="Ver siguiente foto">
+        <svg class="ic"><use href="#ic-arrow"/></svg>
+      </button>
     </div>
     <div class="carousel__dots" id="carouselDots"></div>
   </div>
-  <div class="container center">
+  <div class="container container--narrow center">
+    <p class="lead">Sube y comparte tus registros de fotos y videos del día de nuestro matrimonio en nuestro álbum colaborativo.</p>
     <a class="btn btn--outline" href="#" id="photoAlbumLink" target="_blank" rel="noopener">Subir fotos y videos</a>
   </div>
 </section>
@@ -844,7 +919,10 @@
   </div>
   <div class="shop-scroll container">
     <div class="shop" id="shopGrid"></div>
-    <button type="button" class="shop-arrow" id="shopArrow" aria-label="Ver más regalos">
+    <button type="button" class="shop-arrow shop-arrow--prev" id="shopArrowPrev" aria-label="Ver regalos anteriores">
+      <svg class="ic" style="transform:scaleX(-1)"><use href="#ic-arrow"/></svg>
+    </button>
+    <button type="button" class="shop-arrow shop-arrow--next" id="shopArrowNext" aria-label="Ver más regalos">
       <svg class="ic"><use href="#ic-arrow"/></svg>
     </button>
   </div>
@@ -863,6 +941,10 @@
     </div>
   </div>
 </section>
+
+<div class="container container--narrow center" style="padding:0 22px 50px">
+  <p class="toast-banner">La idea es que disfrutes sin preocuparte por el camino, ¡brindemos juntos por una noche inolvidable! <svg class="ic"><use href="#ic-heart"/></svg></p>
+</div>
 
 <footer class="footer">
   <p class="footer__names">Maca &amp; Carlos</p>
@@ -954,12 +1036,43 @@
 (function(){
   var nav=document.getElementById('nav');
   var navToggle=document.getElementById('navToggle');
+  var navToggleIcon=document.getElementById('navToggleIcon');
   var navMenu=document.getElementById('navMenu');
-  navToggle.addEventListener('click',function(){
-    var open=navMenu.classList.toggle('is-open');
+  var navMenuClose=document.getElementById('navMenuClose');
+  var navMenuBackdrop=document.getElementById('navMenuBackdrop');
+  function setNavMenuOpen(open){
+    navMenu.classList.toggle('is-open',open);
+    navMenuBackdrop.classList.toggle('is-open',open);
     navToggle.setAttribute('aria-expanded',open);
+    navToggle.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');
+    if(navToggleIcon)navToggleIcon.setAttribute('href',open?'#ic-close':'#ic-menu');
+  }
+  navToggle.addEventListener('click',function(){
+    setNavMenuOpen(!navMenu.classList.contains('is-open'));
   });
-  navMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navMenu.classList.remove('is-open');});});
+  if(navMenuClose)navMenuClose.addEventListener('click',function(){setNavMenuOpen(false);});
+  navMenuBackdrop.addEventListener('click',function(){setNavMenuOpen(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setNavMenuOpen(false);});
+  navMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setNavMenuOpen(false);});});
+
+  // floating quick-nav bar: highlight the section currently in view
+  var floatNav=document.getElementById('floatNav');
+  if(floatNav){
+    var floatLinks=Array.prototype.slice.call(floatNav.querySelectorAll('a[data-section]'));
+    var navSectionIds=floatLinks.map(function(a){return a.dataset.section;});
+    function updateFloatNavActive(){
+      var pos=window.scrollY+150;
+      var activeId=navSectionIds[0];
+      navSectionIds.forEach(function(id){
+        var el=document.getElementById(id);
+        if(el&&el.offsetTop<=pos){activeId=id;}
+      });
+      floatLinks.forEach(function(a){a.classList.toggle('is-active',a.dataset.section===activeId);});
+    }
+    updateFloatNavActive();
+    window.addEventListener('scroll',updateFloatNavActive,{passive:true});
+    window.addEventListener('resize',updateFloatNavActive);
+  }
 
   // countdown
   var WEDDING_DATE=new Date('2026-12-05T18:00:00-03:00').getTime();
@@ -1022,13 +1135,22 @@
     });
   }
 
-  var shopArrowBtn=document.getElementById('shopArrow');
-  if(shopArrowBtn){
-    shopArrowBtn.addEventListener('click',function(){
+  var shopArrowNextBtn=document.getElementById('shopArrowNext');
+  if(shopArrowNextBtn){
+    shopArrowNextBtn.addEventListener('click',function(){
       var grid=document.getElementById('shopGrid');
       var atEnd=grid.scrollLeft+grid.clientWidth>=grid.scrollWidth-10;
       if(atEnd){grid.scrollTo({left:0,behavior:'smooth'});}
-      else{grid.scrollBy({left:230,behavior:'smooth'});}
+      else{grid.scrollBy({left:254,behavior:'smooth'});}
+    });
+  }
+  var shopArrowPrevBtn=document.getElementById('shopArrowPrev');
+  if(shopArrowPrevBtn){
+    shopArrowPrevBtn.addEventListener('click',function(){
+      var grid=document.getElementById('shopGrid');
+      var atStart=grid.scrollLeft<=10;
+      if(atStart){grid.scrollTo({left:grid.scrollWidth,behavior:'smooth'});}
+      else{grid.scrollBy({left:-254,behavior:'smooth'});}
     });
   }
 
@@ -1117,7 +1239,7 @@
   var rsvpModal=document.getElementById('rsvpModal');
   function openRsvpModal(){rsvpModal.classList.add('is-open');rsvpModal.setAttribute('aria-hidden','false');}
   function closeRsvpModal(){rsvpModal.classList.remove('is-open');rsvpModal.setAttribute('aria-hidden','true');}
-  ['openRsvpFromInvite','openRsvpFromSection'].forEach(function(id){
+  ['openRsvpFromSection','floatRsvp'].forEach(function(id){
     var el=document.getElementById(id);
     if(el)el.addEventListener('click',openRsvpModal);
   });
@@ -1181,6 +1303,11 @@
     render();
     resetTimer();
     window.addEventListener('resize',render);
+
+    var carouselArrowBtn=document.getElementById('carouselArrow');
+    if(carouselArrowBtn){
+      carouselArrowBtn.addEventListener('click',function(){goTo(current-1);resetTimer();});
+    }
   }
 })();
 </script>
