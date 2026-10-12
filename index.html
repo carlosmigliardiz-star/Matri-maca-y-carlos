@@ -1040,6 +1040,11 @@
 
 <script>
 (function(){
+  // ====== CONFIGURACIÓN ======
+  // Pega aquí la URL de tu Google Apps Script (termina en /exec) para que las
+  // confirmaciones de asistencia se guarden en tu Google Sheet.
+  var RSVP_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxHN1p_qurImN6hehUlQtqpFmgkBCxeZKd4Le1OHyS7HPcWoO3YgaBZJvYtq4R7UImx/exec';
+
   var nav=document.getElementById('nav');
   var navToggle=document.getElementById('navToggle');
   var navToggleIcon=document.getElementById('navToggleIcon');
@@ -1236,9 +1241,32 @@
     var data=new FormData(form);
     var nombre=data.get('nombre'),asistencia=data.get('asistencia');
     if(!nombre||!asistencia){statusEl.textContent='Por favor completa los campos obligatorios.';return;}
-    statusEl.textContent='¡Gracias '+nombre+'! (vista previa: aún falta conectar Google Sheets)';
-    form.reset();
-    setTimeout(closeRsvpModal,2200);
+
+    if(!RSVP_SHEET_URL||RSVP_SHEET_URL.indexOf('PEGA_AQUI')===0){
+      statusEl.textContent='¡Gracias '+nombre+'! (vista previa: aún falta conectar Google Sheets)';
+      form.reset();
+      setTimeout(closeRsvpModal,2200);
+      return;
+    }
+
+    submitBtn.disabled=true;
+    var originalBtnText=submitBtn.textContent;
+    submitBtn.textContent='Enviando…';
+    statusEl.textContent='Enviando tu confirmación…';
+
+    fetch(RSVP_SHEET_URL,{method:'POST',mode:'no-cors',body:data})
+      .then(function(){
+        statusEl.textContent='¡Gracias '+nombre+'! Tu confirmación quedó registrada 🎉';
+        form.reset();
+        submitBtn.disabled=false;
+        submitBtn.textContent=originalBtnText;
+        setTimeout(closeRsvpModal,2200);
+      })
+      .catch(function(){
+        statusEl.textContent='No pudimos enviar tu confirmación. Revisa tu conexión e inténtalo de nuevo.';
+        submitBtn.disabled=false;
+        submitBtn.textContent=originalBtnText;
+      });
   });
 
   // Modal de RSVP (se abre desde el botón de "Confirmar asistencia" en la invitación y en la sección RSVP)
