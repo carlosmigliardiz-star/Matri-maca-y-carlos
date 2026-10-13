@@ -266,6 +266,14 @@
   .plank__spark{width:14px;height:14px;color:var(--terracotta);}
   .plank__note{font-size:.82rem;color:var(--ink-soft);margin:0;max-width:270px;}
 
+  /* dropdown "Algunas ideas" (vestimenta) */
+  .dropdown{position:relative;display:inline-block;}
+  .dropdown__toggle{cursor:pointer;}
+  .dropdown__menu{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);min-width:240px;background:var(--paper);border:1px solid var(--sand-2);border-radius:var(--radius);box-shadow:var(--shadow);padding:6px;z-index:40;}
+  .dropdown.is-open .dropdown__menu{display:block;}
+  .dropdown__item,.btn-descarga{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-family:'Mulish',sans-serif;font-size:.88rem;font-weight:600;white-space:nowrap;}
+  .dropdown__item:hover,.btn-descarga:hover{background:var(--sand);}
+
   /* alojamiento y transporte */
   .rule-deco{display:flex;align-items:center;justify-content:center;gap:12px;margin:26px auto 0;max-width:200px;}
   .rule-deco span{flex:1;height:1px;background:var(--sand-2);}
@@ -809,7 +817,13 @@
 
       <p class="plank__note" style="margin-top:12px">¡Nos encantaría llenar este día de colores y alegría! Por eso, te invitamos a evitar el negro, el rojo y el blanco.</p>
 
-      <a class="btn btn--outline" href="https://pin.it/7wmYV8nTs" target="_blank" rel="noopener">Algunas ideas <svg class="ic"><use href="#ic-hanger"/></svg></a>
+      <div class="dropdown" id="dressIdeasDropdown">
+        <button class="btn btn--outline dropdown__toggle" id="dressIdeasToggle" type="button" aria-haspopup="true" aria-expanded="false">Algunas ideas <svg class="ic"><use href="#ic-hanger"/></svg></button>
+        <div class="dropdown__menu" id="dressIdeasMenu">
+          <a class="dropdown__item" href="https://pin.it/7wmYV8nTs" target="_blank" rel="noopener">Ir a Pinterest</a>
+          <a href="/vestimenta.pdf" download class="btn-descarga dropdown__item">Descargar guía de vestimenta</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1285,6 +1299,22 @@
   rsvpModal.addEventListener('click',function(e){if(e.target===rsvpModal)closeRsvpModal();});
 
   document.getElementById('photoAlbumLink').href='https://photos.app.goo.gl/iBM2dFjanYk9XwNy8';
+
+  var dressIdeasToggle=document.getElementById('dressIdeasToggle');
+  var dressIdeasDropdown=document.getElementById('dressIdeasDropdown');
+  if(dressIdeasToggle&&dressIdeasDropdown){
+    dressIdeasToggle.addEventListener('click',function(e){
+      e.stopPropagation();
+      var isOpen=dressIdeasDropdown.classList.toggle('is-open');
+      dressIdeasToggle.setAttribute('aria-expanded',isOpen?'true':'false');
+    });
+    document.addEventListener('click',function(e){
+      if(!dressIdeasDropdown.contains(e.target)){
+        dressIdeasDropdown.classList.remove('is-open');
+        dressIdeasToggle.setAttribute('aria-expanded','false');
+      }
+    });
+  }
 
   // Carrusel de galería (coverflow: centro nítido, laterales difuminados, avanza hacia la derecha)
   var viewport=document.getElementById('carouselViewport');
